@@ -1,0 +1,55 @@
+.App{
+    width: 80rem;
+    background: white;
+    /*height: 200vh;*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: available;
+    align-self: center;
+}
+
+.forecast-app{
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 5rem;
+    padding-right: 5rem;
+}
+
+.switch{
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    align-self: flex-start;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+}
+.navbar{
+    width: 70rem;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem;
+    font-size: 2rem;
+}
+.navbar>img{
+    width: 10rem;
+    align-self: flex-start;
+}
+.links{
+    display: flex;
+    flex-direction: row;
+    width: 40rem;
+    justify-content: space-around;
+    align-items: center;
+}
+
+a:hover{
+    background: #f0f0f0;
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
