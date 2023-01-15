@@ -7,8 +7,17 @@ import {historicalData} from "../../Models/models"
 const LatestData = ()=>{
     const [data,setData] = useState([])
     const [modelFactory, setModel] = useState([])
-
-    const getDataXHR = (city) => {
+    //Q5 a function to modify array
+    const parseResultArray = (temp)=>{
+        let num = temp.length - 4
+        let resArr = []
+        for (let i = num; i < temp.length; i++) {
+            resArr.push(temp[i])
+        }
+        return resArr
+    }
+    //Q5 function that takes call back in
+    const getDataXHR = (city,parseResultArray) => {
         let xhr = new XMLHttpRequest()
         xhr.open("GET",url("data",city))
         xhr.send()
@@ -17,11 +26,8 @@ const LatestData = ()=>{
             if (xhr.status === 200){
                 temp = JSON.parse(xhr.responseText)
                 setData(temp)
-                let num = temp.length - 4
-                let resArr = []
-                for (let i = num; i < temp.length; i++) {
-                    resArr.push(temp[i])
-                }
+                //Q5 callback used
+                let resArr = parseResultArray(temp)
                 setModel(resArr.map(historicalData))
             }else{
                 console.log("error loading the data")
@@ -29,7 +35,7 @@ const LatestData = ()=>{
         }
     }
     const handleClickData = async (city)=>{
-        getDataXHR(city)
+        await getDataXHR(city,parseResultArray)
     }
 
     const getMinTempLastDay = ()=>{
@@ -71,21 +77,22 @@ const LatestData = ()=>{
         }
         return total / count
     }
+    //Q5 making network request
     useEffect(()=>{
-        getDataXHR("Aarhus")
+        getDataXHR("Aarhus",parseResultArray)
     },[])
 
     return(
         <div className={"latest-data-container"}>
             <div className={"switch-latest"}>
                 <CityButton city={"Aarhus"} cb={()=>{
-                    handleClickData("Aarhus")
+                    handleClickData("Aarhus",parseResultArray)
                 }}/>
                 <CityButton city={"Horsens"} cb={()=>{
-                    handleClickData("Horsens")
+                    handleClickData("Horsens",parseResultArray)
                 }}/>
                 <CityButton city={"Copenhagen"} cb={()=>{
-                handleClickData("Copenhagen")
+                handleClickData("Copenhagen",parseResultArray)
             }}/>
             </div>
             <div className={"latest-data"}>

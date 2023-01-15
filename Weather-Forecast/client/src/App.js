@@ -26,7 +26,7 @@ function App() {
         }
         return resultArr
     }
-
+    //Q5 forEach method takes callback
     const getForecastFiltered = async ()=>{
         let temp = await getForecast(url("forecast","Aarhus"))
         temp.forEach((item,i) => {

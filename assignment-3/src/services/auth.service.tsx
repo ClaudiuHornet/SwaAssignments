@@ -9,7 +9,7 @@ const register = (username: string, password: string) => {
     password,
   });
 };
-
+//Q6 async call
 const login = async (username: string, password: string) => {
     return axios
       .post(API_URL + "login", {

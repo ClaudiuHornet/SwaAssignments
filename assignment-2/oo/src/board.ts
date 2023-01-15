@@ -29,9 +29,18 @@ export type BoardEvent<T> = {
 
 export type BoardListener<T> = (event: BoardEvent<T>) => void;
 
-export class Board<T> {
+  //Alternatively PROTOTYPICAL INHERITANCE
+export class InitBoard{
   width: number;
   height: number;
+
+  constructor(width: number, height: number) {
+    this.width = width;
+    this.height = height;
+  }
+}
+
+export class Board<T> extends InitBoard{
 
   eventsEnabled: boolean = false;
   generator: Generator<T>;
@@ -40,8 +49,7 @@ export class Board<T> {
   listeners: BoardListener<T>[] = [];
 
   constructor(generator: Generator<T>, columns: number, rows: number) {
-    this.width = columns;
-    this.height = rows;
+    super(columns,rows)
     this.generator = generator;
 
     this.initBoardFill();

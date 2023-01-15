@@ -8,13 +8,15 @@ const SendData = ()=>{
     let urlString = "ws://localhost:3090/warnings"
     let subscribe = "subscribe"
     let unsubscribe = "unsubscribe"
+    let socket;
 
     const subHandler = ()=>{
-        sendMessageWS(subscribe,urlString)
+        socket = sendMessageWS(subscribe,urlString)
     }
 
     const unsubHandler = ()=>{
-        sendMessageWS(unsubscribe,urlString)
+        socket.send(unsubscribe)
+        socket.close()
     }
 
     return(

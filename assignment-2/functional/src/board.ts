@@ -27,14 +27,15 @@ export type RemoveMatchesFn<T> = (
   columnMatches: Piece<T>[]
 ) => void;
 
-// ! Q3 (object and array, primitive)
+            // ! Q3 (object and array, primitive)
 
-//object
-export type Board<T> = {
-  width: number; //primitive value
-  height: number; //primitive value
-  pieces: Piece<T>[]; //array
-};
+            //object
+            export type Board<T> = {
+              width: number; //primitive value
+              height: number; //primitive value
+              pieces: Piece<T>[]; //array
+            };
+
 
 export type Effect<T> = {
   kind: string;
@@ -53,7 +54,7 @@ export type MoveResult<T> = {
 };
 
 /* ----------------------------- GIVEN FUNCTIONS ---------------------------- */
-
+//Normal factory function
 export function create<T>(
   generator: Generator<T>,
   width: number,
@@ -65,6 +66,30 @@ export function create<T>(
     pieces: initBoardFill(generator, height, width),
   };
 }
+          // or alternatively factory functions with concatenative inheritance
+                //Q2 USE OF PROTOTYPICAL INHERITANCE
+
+                // export interface InitBoard {
+                //   width: number; //primitive value
+                //   height: number; //primitive value
+                // }
+                //
+                // export interface FullBoard<T> extends InitBoard{
+                //   pieces: Piece<T>[];
+                // }
+                // export function createInit(
+                //     width: number,
+                //     height: number
+                // ): InitBoard {
+                //   return {
+                //     width,
+                //     height
+                //   }
+                // }
+                // export function createFull<T>(generator: Generator<T>,initBoard:InitBoard):FullBoard<T>{
+                //   let pieces = initBoardFill(generator, initBoard.height, initBoard.width)
+                //   return {...initBoard, pieces}
+                // }
 
 export function piece<T>(board: Board<T>, p: Position): T | undefined {
   if (!isPositionOutsideBoard(board, p)) {
@@ -72,6 +97,12 @@ export function piece<T>(board: Board<T>, p: Position): T | undefined {
   }
   return findPieceOnPosition(board, p).value;
 }
+              // export function piece<T>(board: FullBoard<T>, p: Position): T | undefined {
+              //   if (!isPositionOutsideBoard(board, p)) {
+              //     return undefined;
+              //   }
+              //   return findPieceOnPosition(board, p).value;
+              // }
 
 export function canMove<T>(
   board: Board<T>,
@@ -356,6 +387,7 @@ function neighourCheck<T>(
  * Searchs for matches in all rows of the board.
  * @returns the array with all found matches
  */
+// ! Q4 (Own higher order function)
 function getAllPiecesInRow<T>(board: Board<T>, rowIndex: number) {
   return board.pieces.filter((element) => {
     return element.position.row === rowIndex;
@@ -380,10 +412,6 @@ function getAllPiecesInColumn<T>(board: Board<T>, columnIndex: number) {
 /**
  * Scans the board to find all matches, removes them and calls a recursive refill function
  */
-// ! Q4 (Own higher order function)
-// The function has its own type - RemoveMatchesFn
-// Use the function removeMatches inside the scanBoard function - this makes the higher order function.
-// Thanks to the higher order function we know what function need to be included.
 
 function scanBoard<T>(
   board: Board<T>,
@@ -510,12 +538,11 @@ function swapPieces<T>(board: Board<T>, first: Position, second: Position) {
 
   (board.pieces as any).swapProperties(firstIndex, secondIndex, `value`);
 }
-
+// ! Q4 (JS higher-order function)
+// A function find takes an argument as a function that filters a certain board
+// A function find returns a piece as an element
 function findPieceOnPosition<T>(board: Board<T>, position: Position) {
-  // ! Q4 (JS higher-order function)
-  // A function find takes an argument as a function that filters a certain board
-  // A function find returns a piece as an element
-  
+
   return board.pieces.find((element: Piece<T>) => {
     return (
       element.position.col == position.col &&

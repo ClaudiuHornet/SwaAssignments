@@ -38,6 +38,7 @@ class GeneratorFake<T> implements Generator<T> {
 
 }
 
+// @ts-ignore
 function require(board: Board<String>) {
     function toEqual(...tiles: String[]) {
         for(let row: number = 0; row < board.height; row++) {
@@ -52,6 +53,7 @@ function require(board: Board<String>) {
 describe("Board", () => {
     describe("Initial board", () => {
         const generator = new CyclicGenerator('ABC')
+        //object creation
         const board = new Board(generator, 2, 3)
 
         it("has the given width", () => {
