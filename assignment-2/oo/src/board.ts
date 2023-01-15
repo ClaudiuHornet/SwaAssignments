@@ -29,7 +29,8 @@ export type BoardEvent<T> = {
 
 export type BoardListener<T> = (event: BoardEvent<T>) => void;
 
-  //Alternatively PROTOTYPICAL INHERITANCE
+  //Q2 Class based INHERITANCE
+//1. Define how initial class look
 export class InitBoard{
   width: number;
   height: number;
@@ -40,6 +41,8 @@ export class InitBoard{
   }
 }
 
+//2. Sub class extend the initial class
+
 export class Board<T> extends InitBoard{
 
   eventsEnabled: boolean = false;
@@ -49,6 +52,7 @@ export class Board<T> extends InitBoard{
   listeners: BoardListener<T>[] = [];
 
   constructor(generator: Generator<T>, columns: number, rows: number) {
+    //3. inherits from superclass ==> tests
     super(columns,rows)
     this.generator = generator;
 

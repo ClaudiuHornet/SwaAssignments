@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from '@jest/globals'
 import { Effect, Generator } from '../src/board'
 import * as Board from '../src/board'
-
+//Q3 implement Generator providing that type will be string
 class CyclicGenerator implements Generator<string> {
     private sequence: string
     private index: number
@@ -53,8 +53,10 @@ function require(board: Board.Board<String>) {
 
 describe("Board", () => {
     describe("Initial board", () => {
+        //Q3 we inititalize the generator with type string
         const generator = new CyclicGenerator('ABC')
-        const board = Board.create(generator, 2, 3)
+        //Q3 board initialized with provided type string
+        const board = Board.create<string>(generator, 2, 3)
         //Q2 aternative usage of factory functions
         // const initBoard = Board.createInit(2,3)
         // const board = Board.createFull(generator,initBoard)

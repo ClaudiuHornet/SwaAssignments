@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from '@jest/globals'
-import { Generator, Board, BoardEvent } from '../src/board'
+import {Generator, Board, BoardEvent, InitBoard} from '../src/board'
 
 class CyclicGenerator implements Generator<string> {
     private sequence: string
@@ -53,8 +53,9 @@ function require(board: Board<String>) {
 describe("Board", () => {
     describe("Initial board", () => {
         const generator = new CyclicGenerator('ABC')
-        //object creation
-        const board = new Board(generator, 2, 3)
+        //4.object creation
+        const initBoard = new InitBoard(2,3)
+        const board = new Board<string>(generator, 2, 3)
 
         it("has the given width", () => {
             expect(board.width).toEqual(2)

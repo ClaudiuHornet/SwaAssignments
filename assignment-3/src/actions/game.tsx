@@ -4,7 +4,7 @@ import { canMove, clearCurrent, create, createGame, getGame, getGames, initalSca
 import { RandomColorGenerator } from '../utils/random-color-generator';
 
 // ! Q7 (2 - dispatch action)
-// After receiving the answers from an api, a disptach or hook is used that redirects to reducer, if the request has not been sent using then
+// Disptach redirects to reducer the reducer providing the type of action and payload
 // But if the request has not happened, a new request is sent using setMessage.
 
 export const createBoard = (userId: number, gameId: any) => (dispatch: any) => {

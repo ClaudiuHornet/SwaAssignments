@@ -1,3 +1,4 @@
+//Q3 generic type generator ==> tests
 export type Generator<T> = { next: () => T };
 
 export type Position = {
@@ -54,7 +55,7 @@ export type MoveResult<T> = {
 };
 
 /* ----------------------------- GIVEN FUNCTIONS ---------------------------- */
-//Normal factory function
+//Q2 Normal factory function
 export function create<T>(
   generator: Generator<T>,
   width: number,
@@ -66,17 +67,36 @@ export function create<T>(
     pieces: initBoardFill(generator, height, width),
   };
 }
-          // or alternatively factory functions with concatenative inheritance
                 //Q2 USE OF PROTOTYPICAL INHERITANCE
-
-                // export interface InitBoard {
+                //export interface InitBoard<T>{
+                //     width: number; //primitive value
+                //     height: number; //primitive value
+                //     pieces: Piece<T>[];
+                // }
+                // export const prototype:InitBoard<any> = {
+                //   width:0,
+                //   height:0,
+                //   pieces:[]
+                // }
+                // export const createInitBoard = <T>(generator: Generator<T>, width: number, height: number):InitBoard<T>=>{
+                ////the obj inherits the prototype of the prototype
+                //   const obj = Object.create(prototype)
+                //   obj.width = width
+                //   obj.height = height
+                //   obj.pieces = initBoardFill(generator,height,width)
+                //   return obj
+                // }
+                //Q2 USE OF Concatenative INHERITANCE
+                // 1. Create how initial board looks
+                //export interface InitBoard {
                 //   width: number; //primitive value
                 //   height: number; //primitive value
                 // }
-                //
+                //// 2. Create how full board looks extending the prototype of the initial board
                 // export interface FullBoard<T> extends InitBoard{
                 //   pieces: Piece<T>[];
                 // }
+                //initial factory function
                 // export function createInit(
                 //     width: number,
                 //     height: number

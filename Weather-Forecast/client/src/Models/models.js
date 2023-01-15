@@ -7,7 +7,8 @@ export const sharedData = (place, type, unit, time) => {
     const getTime = () => time
     return { getPlace, getType, getUnit, getTime }
 }
-            // CONSTRUCTORS
+            // Q2 CONSTRUCTORS
+            //Q1 .this usage
             //  or alternatively 1.
             // const Data = (place,type,unit,time) => {
             //     this.place = place
@@ -28,6 +29,7 @@ export const historicalData = ({data, value, type, unit, time, place, direction,
 
                 //DIRECT OBJECT CREATION
                 // or alternatively
+                //Q1 original object
                 //1.
                 // let dataE = {
                 //     place:place,
@@ -41,10 +43,10 @@ export const historicalData = ({data, value, type, unit, time, place, direction,
                 // dataE.prototype.getUnit = ()=> this.unit
                 // dataE.prototype.getTime = ()=> this.time
 
-                //Prototypical
+                //Q1 Prototypical
                 // data = Object.create(dataE)
                 // data.place = place
-                //Concatenative
+                //Q1 Concatenative
                 // data = {...dataE}
                 // data.place = place
 

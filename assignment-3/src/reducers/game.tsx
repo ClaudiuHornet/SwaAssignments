@@ -17,8 +17,7 @@ const initialState = {
     gameId,
 };
 
-// ! Q7 (3 - Reducer) - updates the state based on the actions regarding the game's state.
-//Overrites the old state using the payload coming from an action.
+
 
 // ! Q9 (Reducer - does the global state management) - can be listened in many components.
 // Reducer state overrites the changes that are coming from the payload of an action.
@@ -26,7 +25,9 @@ const initialState = {
 
 export default function (state = initialState, action: Action) {
   const { type, payload } = action;
-
+// ! Q7 (3 - Reducer) -
+// updates the state based on the actions type.
+//Overrites the old state using the payload coming from an action.
   switch (type) {
     case BOARD_CREATED: 
         return {
